@@ -1,21 +1,30 @@
--- :name create-user! :! :n
--- :doc creates a new user record
-INSERT INTO users
-(id, first_name, last_name, email, pass)
-VALUES (:id, :first_name, :last_name, :email, :pass)
+-- :name save-reservation! :! :n
+-- :doc creates a reservation
+INSERT INTO reservation
+(first_name, last_name, email, date, number_of_seat, cinema, film)
+VALUES (:first_name, :last_name, :email, :date, :number_of_seat, :cinema, :film)
 
--- :name update-user! :! :n
--- :doc update an existing user record
-UPDATE users
-SET first_name = :first_name, last_name = :last_name, email = :email
-WHERE id = :id
+-- :name get-reservations :?
+-- :doc selects all reservations
+SELECT * from reservation
 
--- :name get-user :? :1
--- :doc retrieve a user given the id.
-SELECT * FROM users
-WHERE id = :id
+-- :name get-reservation :? :1
+SELECT *
+FROM reservation
+WHERE id_reservation = :id_reservation
 
--- :name delete-user! :! :n
--- :doc delete a user given the id
-DELETE FROM users
-WHERE id = :id
+-- :name update-reservation! :! :1
+-- :doc update an existing reservation
+UPDATE reservation SET
+first_name = :first_name,
+last_name = :last_name,
+email = :email,
+date = :date,
+number_of_seat = :number_of_seat,
+cinema = :cinema,
+film = :film
+WHERE id_reservation = :id_reservation
+
+-- :name delete-reservation :! :n
+DELETE FROM reservation
+WHERE id_reservation = :id_reservation
