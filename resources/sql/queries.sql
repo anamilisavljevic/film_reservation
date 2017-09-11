@@ -28,3 +28,6 @@ WHERE id_reservation = :id_reservation
 -- :name delete-reservation :! :n
 DELETE FROM reservation
 WHERE id_reservation = :id_reservation
+
+-- :name get-user :? :1
+SELECT * FROM user WHERE username = :username AND password = :password

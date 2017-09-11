@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% style "/assets/bootstrap/css/bootstrap.min.css" %}
+    {% style "/assets/font-awesome/css/font-awesome.min.css" %}
+
+    {% style "/css/screen.css" %}
+</head>
+<body class="login-form-background">
+<div class="login-form">
+<form name="input" action="/login" method="POST">
+    {% csrf-field %}
+    <h1 style="padding-bottom: 20px">Login</h1>
+    <p>
+        Username: <input class="form-control" type="text" name="username">
+    </p>
+   <p>
+       Password: <input class="form-control" type="password" name="password">
+   </p>
+   <div class="btn-login"> <input class="btn btn-success" type="submit" value="Submit"/></div>
+
+</form>
+</div>
+</body>
+</html>
+
