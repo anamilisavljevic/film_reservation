@@ -10,9 +10,9 @@
             [ring.util.response :refer [redirect]]
             [hiccup.page :as h]))
 
-(defn home-page []
+(defn main-page []
   (layout/render
-    "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
+    "main.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
 
 (defn about-page []
   (layout/render "about.html"))
@@ -26,8 +26,9 @@
   (response/found "/") (response/found "/about")))
 
 (defroutes home-routes
-  (GET "/" [] (home-page))
+  (GET "/" [] (login-page))
   (GET "/about" [] (about-page))
+  (GET "/main" [] (main-page))
   (POST "/login" request (login request))
-  (GET "/logout" [] (login-page)))
-
+  (GET "/logout" [] (login-page))
+)

@@ -1,58 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to film_reservation</title>
+    <title>Welcome to film reservation</title>
 
     <!-- styles -->
     {% style "/assets/bootstrap/css/bootstrap.min.css" %}
     {% style "/assets/font-awesome/css/font-awesome.min.css" %}
 
     {% style "/css/screen.css" %}
-  </head>
-  <body>
-      <!-- navbar -->
-      <nav class="navbar navbar-dark bg-primary" role="navigation">
-          <button class="navbar-toggler hidden-sm-up"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#collapsing-navbar">
-              &#9776;
-          </button>
-          <div class="collapse navbar-toggleable-xs" id="collapsing-navbar">
-              <a class="navbar-brand" href="{{servlet-context}}/">film_reservation</a>
-              <ul class="nav navbar-nav">
-                  <li class="nav-item">
-                      <a href="{{servlet-context}}/"
-                         class="nav-link{% ifequal page "home.html" %} active{%endifequal%}">
-                      home
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{servlet-context}}/about"
-                         class="nav-link{% ifequal page "about.html" %} active{%endifequal%}">
-                      about
-                      </a>
-                  </li>
-              </ul>
-          </div>
-      </nav>
-
-    <div class="container">
-      {% block content %}
-      {% endblock %}
+</head>
+<body class="">
+<!-- navbar -->
+<nav class="navbar navbar-dark bg-primary " role="navigation">
+    <button class="navbar-toggler hidden-sm-up"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapsing-navbar">
+        &#9776;
+    </button>
+    <div class="collapse navbar-toggleable-xs" id="collapsing-navbar">
+        <a class="navbar-brand" href="{{servlet-context}}/main" class="nav-link{% ifequal page "main.html" %} active{%endifequal%}">
+        <img height="100px" width="100px" src="{{servlet-context}}/img/icon.png"></img></a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item header-link" >
+                <a id="header-link-font-1"  href="{{servlet-context}}/about"
+                   class="nav-link{% ifequal page "about.html" %} active{%endifequal%}">
+                About application
+                </a>
+            </li>
+            <li class="nav-item header-link">
+                <a id="header-link-font-2" href="{{servlet-context}}/make-reservation"
+                   class="nav-link{% ifequal page "main.html" %} active{%endifequal%}">
+                Make reservation
+                </a>
+            </li>
+            <li class="nav-item header-link">
+                <a id="header-link-font-3"  href="{{servlet-context}}/all-reservations" style="color: aliceblue;"
+                   class="nav-link{% ifequal page " all-reservations.html" %} active{%endifequal%}">
+                All reservations
+                </a>
+            </li>
+            <li class="nav-item header-link">
+                <a id="header-link-font-5" href="{{servlet-context}}/logout" style="color: aliceblue;"
+                   class="nav-link{% ifequal page " login.html" %} active{%endifequal%}">
+                Logout
+                </a>
+            </li>
+        </ul>
     </div>
+</nav>
 
-    <!-- scripts -->
-    {% script "/assets/jquery/jquery.min.js" %}
-    {% script "/assets/tether/dist/js/tether.min.js" %}
-    {% script "/assets/bootstrap/js/bootstrap.min.js" %}
-
-    <script type="text/javascript">
-      var context = "{{servlet-context}}";
-    </script>
-    {% block page-scripts %}
+<div class="container">
+    {% block content %}
     {% endblock %}
-  </body>
+</div>
+
+<!-- scripts -->
+{% script "/assets/jquery/jquery.min.js" %}
+{% script "/assets/tether/dist/js/tether.min.js" %}
+{% script "/assets/bootstrap/js/bootstrap.min.js" %}
+<link href="datepicker/datepicker3.css" rel="stylesheet">
+
+<script src="datepicker/bootstrap-datepicker.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+    var context = "{{servlet-context}}";
+</script>
+{% block page-scripts %}
+{% endblock %}
+</body>
 </html>

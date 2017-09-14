@@ -26,6 +26,27 @@ body {
 #image_logo{
   padding-top: 20px;
 }
+.header-link{
+  position: relative;
+  padding-top: 35px;
+  font-size: x-large;
+}
+#header-link-font-1{
+  color: aliceblue;
+}
+#header-link-font-2{
+  color: aliceblue;
+}
+#header-link-font-3{
+  color: aliceblue;
+}
+#header-link-font-4{
+  color: aliceblue;
+}
+#header-link-font-5{
+  color: aliceblue;
+  padding-left: 650px;
+}
 .login-form{
   position: absolute;
   padding-left: 500px;
