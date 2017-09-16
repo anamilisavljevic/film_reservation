@@ -23,7 +23,26 @@ To start a web server for the application, run:
 
     lein run 
 ## Some of libraries used
+### compojure 1.3.1
+A concise routing library for Ring - https://github.com/weavejester/compojure
 
+	[compojure "1.3.1"]
+	
+### java.jdbc 0.4.1
+
+A low-level Clojure wrapper for JDBC-based access to databases -https://github.com/clojure/java.jdbc
+
+	[org.clojure/java.jdbc "0.4.1"]
+
+### clj-time 0.14.0
+
+A date and time library for Clojure - https://github.com/clj-time/clj-time
+
+	[clj-time "0.14.0"]
+	
+### clj-time.format
+
+Utilities for parsing and unparsing DateTimes as Strings.
 
 ## License
 
