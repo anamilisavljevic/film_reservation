@@ -24,6 +24,22 @@
   (db/delete-reservation params)
   (response/found "/all-reservations"))
 
+(def custom-formatter (f/formatter "yyyy-MM-dd"))
+
+(defn format-date
+  [date-str]
+  (f/parse custom-formatter date-str))
+
+(defn save-reservation! [{:keys [params]}]
+  (db/save-reservation! (assoc params :date (format-date (get params :date))))
+  (response/found "/main")
+  )
+
+(defn make-reservation-page [{:keys [params flash]}]
+  (layout/render
+    "make-reservation.html"
+    {:reservation (db/get-reservation params)}))
+
 (defn login-page []
   (layout/render
     "login.html"))
@@ -39,5 +55,7 @@
   (POST "/login" request (login request))
   (GET "/logout" [] (login-page))
   (GET "/all-reservations" [] (all-reservation-page))
+  (GET "/make-reservation" request (make-reservation-page request))
+  (POST "/save-reservation" request (save-reservation! request))
   (GET "/delete-reservation" request (delete-reservation request))
 )

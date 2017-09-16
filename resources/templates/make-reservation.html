@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="span12">
+    <ul class="content">
+      {% for item in reservations %}
+      <li>
+        <p>{{item.first_name}}</p>
+        <p> - {{item.last_name}}</p>
+        <p> - {{item.email}}</p>
+        <p> - {{item.number_of_seat}}</p>
+        <p> - {{item.date}}</p>
+        <p> - {{item.cinema}}</p>
+        <p> - {{item.film}}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <form method="POST" action="/save-reservation">
+      {% if reservation.id_reservation %}
+      <input type="hidden" name="id_reservation" value="{{reservation.id_reservation}}">
+      {% endif %}
+      <div class="form-group">
+        {% csrf-field %}
+        <p>
+          First name:
+          <input class="form-control"
+                 type="text"
+                 name="first_name"
+                 id="first_name"
+                 value="{{reservation.first_name}}" />
+        </p>
+        {% if errors.first_name %}
+        <div class="alert alert-danger">{{errors.first_name}}</div>
+        {% endif %}
+        <p>
+          Last Name:
+          <input class="form-control"
+                 type="text"
+                 name="last_name"
+                 id="last_name"
+                 value="{{reservation.last_name}}" />
+        </p>
+        {% if errors.last_name %}
+        <div class="alert alert-danger">{{errors.last_name}}</div>
+        {% endif %}
+        <p>
+        Email:
+        <input class="form-control"
+               type="text"
+               name="email"
+               id="email"
+               value="{{reservation.email}}" />
+        </p>
+        {% if errors.email %}
+        <div class="alert alert-danger">{{errors.email | join}}</div>
+        {% endif %}
+        <p>
+          Number of seat:
+          <input class="form-control"
+                 type="text"
+                 name="number_of_seat"
+                 id="number_of_seat"
+                 value="{{reservation.number_of_seat}}" />
+        </p>
+        {% if errors.number_of_seat %}
+        <div class="alert alert-danger">{{errors.number_of_seat}}</div>
+        {% endif %}
+        <p>
+        Date: <input class="form-control" id="datepicker" name="date" type="date"  width="100px" value='{{reservation.date|date:"yyyy-MM-dd"}}'>
+        </p>
+        {% if errors.date %}
+        <div class="alert alert-danger">{{errors.date}}</div>
+        {% endif %}
+
+        <p>
+          Cinema: <input class="form-control"
+                       type="text"
+                       name="cinema"
+                         id="cinema"
+                       value="{{reservation.cinema}}" />
+        </p>
+        {% if errors.cinema %}
+        <div class="alert alert-danger">{{errors.cinema}}</div>
+        {% endif %}
+      <p>
+        Film:
+        <input class="form-control"
+               type="text"
+               name="film"
+               value="{{reservation.film}}" />
+        </p>
+        {% if errors.film %}
+        <div class="alert alert-danger">{{errors.film}}</div>
+        {% endif %}
+
+          <input id="submit_button" type="submit" class="btn btn-primary" value="Make reservation" />
+      </div>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -20,8 +20,22 @@ body {
 .navbar-nav .nav-link + .nav-link {
   margin-left: 0;
 }
+#submit_button{
+    margin-top: 50px;
+    margin-left: 925px;
+}
 .selectnumber{
   width: 100px;
+}
+#datepicker{
+    width: 300px;
+}
+#select_box{
+    width: 300px;
+    height: 30px;
+}
+.film-table{
+    background-color: yellow;
 }
 #image_logo{
   padding-top: 20px;
@@ -71,6 +85,36 @@ body {
   .navbar-nav .nav-link + .nav-link {
     margin-left: 1rem;
   }
+}
+
+.messages {
+    background: white;
+    width: 520px;
+}
+ul {
+    list-style: none;
+}
+
+ul.messages li {
+    position: relative;
+    font-size: 16px;
+    padding: 5px;
+    border-bottom: 1px dotted #ccc;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+li time {
+    font-size: 12px;
+    padding-bottom: 20px;
+}
+
+form, .error {
+    padding: 30px;
+    margin-bottom: 50px;
+    position: relative;
 }
 .position-login{
   position: absolute;
