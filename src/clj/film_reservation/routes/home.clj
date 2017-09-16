@@ -30,9 +30,48 @@
   [date-str]
   (f/parse custom-formatter date-str))
 
+(def message-schema
+  [[:first_name
+    st/required
+    st/string]
+
+   [:last_name
+    st/required
+    st/string]
+
+   [:email
+    st/required
+    st/string]
+
+   [:number_of_seat
+    st/required
+    st/string]
+
+   [:date
+    st/required
+    st/string]
+
+   [:cinema
+    st/required
+    st/string]
+
+   [:film
+    st/required
+    st/string]
+   ])
+
+(defn validate-message [params]
+  (first (st/validate params message-schema)))
+
 (defn save-reservation! [{:keys [params]}]
-  (db/save-reservation! (assoc params :date (format-date (get params :date))))
-  (response/found "/main")
+  (if-let [errors (validate-message params)]
+    (-> (response/found "/make-reservation")
+        (assoc :flash (assoc params :errors errors)))
+    (do
+      (db/save-reservation! (assoc params :date (format-date (get params :date))))
+      (response/found "/main")
+      )
+    )
   )
 
 (defn make-reservation-page [{:keys [params flash]}]
@@ -49,7 +88,7 @@
     "login.html"))
 
 (defn login [{:keys [params]}]
-  (if (nil? {:user (db/get-user params)}) (response/found "/")  (response/found "/main")))
+  (if (nil? (db/get-user params)) (response/found "/")  (response/found "/main")))
 
 
 (defroutes home-routes
