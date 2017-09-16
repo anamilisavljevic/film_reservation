@@ -38,7 +38,11 @@
 (defn make-reservation-page [{:keys [params flash]}]
   (layout/render
     "make-reservation.html"
-    {:reservation (db/get-reservation params)}))
+    (merge flash (when (contains? params :id_reservation) {:reservation (db/get-reservation params)}))))
+
+(defn update-reservation! [{:keys [params]}]
+  (db/update-reservation! (assoc params :date (format-date (get params :date))))
+  (response/found "/all-reservations"))
 
 (defn login-page []
   (layout/render
@@ -56,6 +60,6 @@
   (GET "/logout" [] (login-page))
   (GET "/all-reservations" [] (all-reservation-page))
   (GET "/make-reservation" request (make-reservation-page request))
-  (POST "/save-reservation" request (save-reservation! request))
+  (POST "/save-reservation" request ((if (contains? (get request :params) :id_reservation) update-reservation! save-reservation!) request))
   (GET "/delete-reservation" request (delete-reservation request))
 )
