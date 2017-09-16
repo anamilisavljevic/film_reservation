@@ -1,0 +1,6 @@
+CREATE TABLE film
+(id_film INTEGER PRIMARY KEY,
+name VARCHAR(60),
+price INTEGER (20),
+director VARCHAR(50)
+);
