@@ -66,5 +66,5 @@
                   :injections [(require 'pjstadig.humane-test-output)
                                (pjstadig.humane-test-output/activate!)]}
    :project/test {:resource-paths ["env/test/resources"]}
-   :profiles/dev {}
-   :profiles/test {}})
+   :profiles/dev  {:env {:database-url "jdbc:h2:./film_reservation_dev.db"}}
+   :profiles/test {:env {:database-url "jdbc:h2:./film_reservation_test.db"}}})
