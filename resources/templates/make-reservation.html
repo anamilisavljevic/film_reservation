@@ -34,7 +34,7 @@
         <p>
           Email:
           <input class="form-control"
-                 type="text"
+                 type="email"
                  name="email"
                  id="email"
                  value="{{reservation.email}}" />
@@ -45,7 +45,7 @@
         <p>
           Number of seat:
           <input class="form-control"
-                 type="text"
+                 type="number"
                  name="number_of_seat"
                  id="number_of_seat"
                  value="{{reservation.number_of_seat}}" />
@@ -85,17 +85,8 @@
           Film:
           <select class="form-control" name="id_film" id="id_film" >
             {% for item in films %}
-              {% if reservation|empty? %}
-                {% if getFilm|empty? %}
-                  <option value="{{item.id_film}}">{{item.name}}</option>
-                {% endif %}
-              {% endif %}
-              {% if getFilm|empty?  %}
-                 <option value="{{reservation.id_film}}">{{reservation.name}}</option>
-              {% endif %}
-              {% if reservation|empty? %}
-                <option value="{{getFilm.id_film}}">{{getFilm.name}}</option>
-              {% endif %}
+              <option value="{{item.id_film}}"{% ifequal item.id_film reservation.id_film %} selected {% endifequal %}
+                      {% ifequal item.id_film getFilm.id_film %} selected {% endifequal %}>{{item.name}}</option>
             {% endfor %}
           </select>
         </p>
