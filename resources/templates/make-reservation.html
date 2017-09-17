@@ -32,12 +32,12 @@
         <div class="alert alert-danger">{{errors.last_name}}</div>
         {% endif %}
         <p>
-        Email:
-        <input class="form-control"
-               type="text"
-               name="email"
-               id="email"
-               value="{{reservation.email}}" />
+          Email:
+          <input class="form-control"
+                 type="text"
+                 name="email"
+                 id="email"
+                 value="{{reservation.email}}" />
         </p>
         {% if errors.email %}
         <div class="alert alert-danger">{{errors.email | join}}</div>
@@ -54,34 +54,53 @@
         <div class="alert alert-danger">{{errors.number_of_seat}}</div>
         {% endif %}
         <p>
-        Date: <input class="form-control" id="datepicker" name="date" type="date"  width="100px" value='{{reservation.date|date:"yyyy-MM-dd"}}'>
+          Date: <input class="form-control" id="datepicker" name="date" type="date"  width="100px" value='{{reservation.date|date:"yyyy-MM-dd"}}'>
         </p>
         {% if errors.date %}
         <div class="alert alert-danger">{{errors.date}}</div>
         {% endif %}
 
         <p>
-          Cinema: <input class="form-control"
-                       type="text"
-                       name="cinema"
-                         id="cinema"
-                       value="{{reservation.cinema}}" />
+          Cinema:
+          <select class="form-control" name="cinema" id="cinema" >
+            {% if reservation|empty? %}
+              <option value="Usce" >Usce</option>
+              <option value="Delta city cineplex" >Delta city cineplex</option>
+            {% endif %}
+            {% ifequal reservation.cinema "Usce" %}
+              <option value="Usce" >Usce</option>
+              <option value="Delta city cineplex" >Delta city cineplex</option>
+            {% endifequal %}
+            {% ifequal reservation.cinema "Delta city cineplex" %}
+              <option value="Delta city cineplex" >Delta city cineplex</option>
+              <option value="Usce" >Usce</option>
+            {% endifequal %}
+          </select>
         </p>
         {% if errors.cinema %}
         <div class="alert alert-danger">{{errors.cinema}}</div>
         {% endif %}
-      <p>
-        Film:
-        <input class="form-control"
-               type="text"
-               name="film"
-               value="{{reservation.film}}" />
-        </p>
-        {% if errors.film %}
-        <div class="alert alert-danger">{{errors.film}}</div>
-        {% endif %}
 
-          <input id="submit_button" type="submit" class="btn btn-primary" value="Make reservation" />
+        <p>
+          Film:
+          <select class="form-control" name="id_film" id="id_film" >
+            {% for item in films %}
+              {% if reservation|empty? %}
+                {% if getFilm|empty? %}
+                  <option value="{{item.id_film}}">{{item.name}}</option>
+                {% endif %}
+              {% endif %}
+              {% if getFilm|empty?  %}
+                 <option value="{{reservation.id_film}}">{{reservation.name}}</option>
+              {% endif %}
+              {% if reservation|empty? %}
+                <option value="{{getFilm.id_film}}">{{getFilm.name}}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </p>
+
+        <input id="submit_button" type="submit" class="btn btn-primary" value="Make reservation" />
       </div>
     </form>
   </div>

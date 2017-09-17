@@ -50,14 +50,6 @@
    [:date
     st/required
     st/string]
-
-   [:cinema
-    st/required
-    st/string]
-
-   [:film
-    st/required
-    st/string]
    ])
 
 (defn validate-message [params]
@@ -69,7 +61,7 @@
         (assoc :flash (assoc params :errors errors)))
     (do
       (db/save-reservation! (assoc params :date (format-date (get params :date))))
-      (response/found "/main")
+      (response/found "/all-reservations")
       )
     )
   )
@@ -77,7 +69,11 @@
 (defn make-reservation-page [{:keys [params flash]}]
   (layout/render
     "make-reservation.html"
-    (merge flash (when (contains? params :id_reservation) {:reservation (db/get-reservation params)}))))
+    (merge flash (when (contains? params :id_reservation)
+                   {:reservation (db/get-reservation params)})
+                 (when (contains? params :id_film)
+                   {:getFilm (db/get-film params)})
+           {:films (db/get-films)})))
 
 (defn update-reservation! [{:keys [params]}]
   (db/update-reservation! (assoc params :date (format-date (get params :date))))
