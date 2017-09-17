@@ -6,5 +6,6 @@ email VARCHAR(30),
 date DATE,
 number_of_seat INTEGER,
 cinema VARCHAR(30),
-film VARCHAR(30)
+id_film INTEGER,
+CONSTRAINT FK_FilmID FOREIGN KEY (id_film) REFERENCES film(id_film)
 );

@@ -90,6 +90,8 @@
 (defn login [{:keys [params]}]
   (if (nil? (db/get-user params)) (response/found "/")  (response/found "/main")))
 
+(defn all-films-page []
+  (layout/render "all-films.html" {:films(db/get-films)}))
 
 (defroutes home-routes
   (GET "/" [] (login-page))
@@ -101,4 +103,5 @@
   (GET "/make-reservation" request (make-reservation-page request))
   (POST "/save-reservation" request ((if (contains? (get request :params) :id_reservation) update-reservation! save-reservation!) request))
   (GET "/delete-reservation" request (delete-reservation request))
+  (GET "/all-films" [] (all-films-page))
 )

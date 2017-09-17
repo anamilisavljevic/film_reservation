@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<table class = "table success" border="3" width="600">
+    <thead>
+    <tr>
+        <th style="visibility: hidden;">Id</th>
+        <th>ID</th>
+        <th>Film name</th>
+        <th>Price</th>
+        <th>Director</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in films %}
+    <tr>
+        <td style="visibility: hidden;">{{item.id_film}}</td>
+        <td>{{item.id_film}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.price}} RSD</td>
+        <td>{{item.director}}</td>
+        <td>
+            <a href="/make-reservation?id_film={{item.id_film}}" class="btn btn-info">
+                Make reservation
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
